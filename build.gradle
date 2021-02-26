@@ -10,13 +10,13 @@ jar {
 }
 
 repositories {
-    jcenter() 
+    jcenter()
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13' 
+    testImplementation 'junit:junit:4.13'
 
-    implementation 'com.google.guava:guava:29.0-jre' 
+    implementation 'com.google.guava:guava:29.0-jre'
 }
 
 application {
@@ -30,7 +30,8 @@ jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['paaohjelma/**'])
+            fileTree(dir: it, exclude: ['ohtuesimerkki/Main.java'])
+            fileTree(dir: it, exclude: ['ohtu/Main.java'])
         }))
     }
 }

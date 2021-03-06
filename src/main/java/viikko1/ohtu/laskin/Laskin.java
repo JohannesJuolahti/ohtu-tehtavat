@@ -1,4 +1,4 @@
-package ohtu.laskin;
+package viikko1.ohtu.laskin;
 
 public class Laskin {
     private IO io;

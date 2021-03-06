@@ -1,4 +1,4 @@
-package ohtuesimerkki;
+package viikko1.ohtuesimerkki;
 
 import java.util.List;
 

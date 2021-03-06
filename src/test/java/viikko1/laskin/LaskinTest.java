@@ -1,10 +1,12 @@
-package ohtu.laskin;
+package viikko1.laskin;
 
 
 
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import viikko1.ohtu.laskin.IO;
+import viikko1.ohtu.laskin.Laskin;
 
 public class LaskinTest {
 

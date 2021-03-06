@@ -1,5 +1,5 @@
 
-package ohtu.laskin;
+package viikko1.ohtu.laskin;
 
 import java.util.Scanner;
 

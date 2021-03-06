@@ -1,4 +1,4 @@
-package ohtu;
+package viikko1.ohtu;
 
 import java.util.Scanner;
 

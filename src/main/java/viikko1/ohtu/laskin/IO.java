@@ -1,4 +1,4 @@
-package ohtu.laskin;
+package viikko1.ohtu.laskin;
 
 
 public interface IO {

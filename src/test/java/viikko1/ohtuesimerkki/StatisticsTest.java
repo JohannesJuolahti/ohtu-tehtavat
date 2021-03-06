@@ -1,8 +1,10 @@
-package ohtuesimerkki;
+package viikko1.ohtuesimerkki;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import viikko1.ohtuesimerkki.Player;
+import viikko1.ohtuesimerkki.Reader;
+import viikko1.ohtuesimerkki.Statistics;
 
 import java.util.ArrayList;
 import java.util.List;

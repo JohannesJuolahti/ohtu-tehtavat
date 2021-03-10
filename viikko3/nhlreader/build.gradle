@@ -1,8 +1,12 @@
 plugins {
     id 'java'
     id 'application'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
+repositories {
+    jcenter()
+}
 mainClassName = 'ohtu.Main'
 /* joudumme tässä tehtävässä käyttämään vanhaa tapaa mainClassin määrittelyyn sillä 
 tehtävässä käytettävä shadowJar-plugin ei osaa uudempaa syntaksia
@@ -11,6 +15,12 @@ application {
 }
 
 */
+dependencies {
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc
+    compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.13'
+    // https://mvnrepository.com/artifact/org.netbeans.external/com-google-gson
+    compile group: 'org.netbeans.external', name: 'com-google-gson', version: 'RELEASE113'
+}
 
 jar {
     manifest {

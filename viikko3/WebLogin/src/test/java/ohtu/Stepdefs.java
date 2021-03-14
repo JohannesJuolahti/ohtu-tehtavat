@@ -24,6 +24,13 @@ public class Stepdefs {
         element.click();
     }
 
+    @Given("command new user is selected")
+    public void newUserIsSelected() {
+        driver.get(baseUrl);
+        WebElement element = driver.findElement(By.linkText("register new user"));
+        element.click();
+    }
+
     @Then("user is logged in")
     public void userIsLoggedIn() {
         pageHasContent("Ohtu Application main page");
@@ -44,10 +51,42 @@ public class Stepdefs {
         logInWith(username, password);
     }
 
+    @When("a valid username {string} and password {string} and matching password confirmation are entered")
+    public void validUsernameAndPasswordAndMatchingPasswordConfirmationAreEntered(String username, String password) {
+        newUserIsSelected();
+        createUserWith(username, password, password);
+    }
+
+    @When("an invalid username {string} and valid password {string} and matching password confirmation are entered")
+    public void invalidUsernameAndValidPasswordAndMatchingPasswordConfirmationAreGiven(String username, String password) {
+        newUserIsSelected();
+        createUserWith(username, password, password);
+        pageHasContent("Create username and give password");
+        userIsNotCreatedAndErrorIsReported("username should have at least 3 characters");
+    }
+
+    @When("a valid username {string} and password {string} and non matching password confirmation are entered")
+    public void aValidUsernameAndPasswordAndNonMatchingPasswordConfirmationAreEntered(String password, String username) {
+        newUserIsSelected();
+        createUserWith(username, password, "NONMATCHINGPASSWORD1");
+        pageHasContent("Create username and give password");
+        userIsNotCreatedAndErrorIsReported("password and password confirmation do not match");
+    }
+
     @Then("user is not logged in and error message is given")
     public void userIsNotLoggedInAndErrorMessageIsGiven() {
         pageHasContent("invalid username or password");
         pageHasContent("Give your credentials to login");
+    }
+
+    @Then("a new user is created")
+    public void aNewUserIsCreated() {
+        pageHasContent("Welcome to Ohtu Application!");
+    }
+
+    @Then("user is not created and error {string} is reported")
+    public void userIsNotCreatedAndErrorIsReported(String string) {
+        pageHasContent(string);
     }
 
     @After
@@ -68,6 +107,19 @@ public class Stepdefs {
         element = driver.findElement(By.name("password"));
         element.sendKeys(password);
         element = driver.findElement(By.name("login"));
+        element.submit();
+    }
+
+    private void createUserWith(String username, String password, String passwordConfirmation) {
+        //assertTrue(driver.getPageSource().contains("Give your credentials to login"));
+        WebElement element;
+        element = driver.findElement(By.name("username"));
+        element.sendKeys(username);
+        element = driver.findElement(By.name("password"));
+        element.sendKeys(password);
+        element = driver.findElement(By.name("passwordConfirmation"));
+        element.sendKeys(passwordConfirmation);
+        element = driver.findElement(By.name("signup"));
         element.submit();
     }
 }

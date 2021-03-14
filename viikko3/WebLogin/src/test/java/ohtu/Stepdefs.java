@@ -1,6 +1,7 @@
 package ohtu;
 
 import io.cucumber.java.After;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -17,7 +18,7 @@ public class Stepdefs {
     WebDriver driver = new HtmlUnitDriver();
     String baseUrl = "http://localhost:4567";
 
-    @Given("login is selected")
+    @And("login is selected")
     public void loginIsSelected() {
         driver.get(baseUrl);
         WebElement element = driver.findElement(By.linkText("login"));
@@ -29,6 +30,18 @@ public class Stepdefs {
         driver.get(baseUrl);
         WebElement element = driver.findElement(By.linkText("register new user"));
         element.click();
+    }
+
+    @Given("user with username {string} with password {string} is successfully created")
+    public void userIsSuccesfullyCreated(String username, String password) {
+        newUserIsSelected();
+        createUserWith(username, password, password);
+    }
+
+    @Given("user with username {string} and password {string} is tried to be created")
+    public void userWithUsernameAndPasswordIsTriedToBeCreated(String username, String password) {
+        newUserIsSelected();
+        createUserWith(username, password, password);
     }
 
     @Then("user is logged in")
@@ -71,6 +84,12 @@ public class Stepdefs {
         createUserWith(username, password, "NONMATCHINGPASSWORD1");
         pageHasContent("Create username and give password");
         userIsNotCreatedAndErrorIsReported("password and password confirmation do not match");
+    }
+
+    @When("an invalid username {string} and password {string} are used in login")
+    public void invalidUsernameAndPasswordAreEntered(String username, String password) {
+        loginIsSelected();
+        logInWith(username, password);
     }
 
     @Then("user is not logged in and error message is given")
